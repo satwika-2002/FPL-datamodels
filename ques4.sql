@@ -1,0 +1,2 @@
+select p.product_name,w.location,w.capacity from warehouses w cross join products p where p.category = 'Sports' and w.warehouse_type = 'Large';
+#we used cross join coz there is no relation between the tables we just joined them based on some cloumns values
