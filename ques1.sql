@@ -11,7 +11,7 @@ Smart Watch        | Electronics | NULL
 [...remaining products with NULL quantities...]
 
 --solution query:
-select p.product_name,p.category,i.quantity,w.location from products p left join inventory i on p.product_id = i.product_id and i.warehouse_id = 1 left join warehouses w on w.warehouse_id = 1 order by i.quantity desc nulls last;
+select p.product_name,p.category,i.quantity,w.location from products p left join inventory i on p.product_id = i.product_id where warehouse_id = 1 order by i.quantity desc nulls last;
 comments:
 --the question collects the data from products,inventory and warehouse TABLES
 --inventory table is holding foreign keys REFERENCES from products and warehouse tables
