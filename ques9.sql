@@ -13,6 +13,8 @@ BEGIN
         products p
     JOIN 
         inventory i ON p.product_id = i.product_id
-    join warehouses w on w.warehouse_id = i.warehouse_id = 1
+    join warehouses w on w.warehouse_id = i.warehouse_id
+    WHERE 
+        i.warehouse_id = warehouse_id;
 END;
-#
+#select * from calculate_inventory_metrics(1); -- to call the function using warehouse_id =1
