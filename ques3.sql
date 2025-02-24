@@ -10,7 +10,7 @@ SmartHome Devices | South Korea | 4.50
 
 --solution query:
 select s.supplier_name,s.country,s.reliability_score from suppliers s where
-exists(select 1 from products p join inventory i on p.product_id = i.product_id join warehouses w on w.warehouse_id = i.warehouse_id where i.quantity < 100)
+exists(select 1 from suppliers s join inventory i on i.supplier_id = s.supplier_id where i.quantity < 100)
 order by s.reliability_score desc;
 
 --comments:
