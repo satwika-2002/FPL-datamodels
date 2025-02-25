@@ -28,15 +28,7 @@ SELECT
         WHEN i.quantity IS NULL THEN 'no stock'
         WHEN i.quantity > 400 THEN 'high stock'
         WHEN (p.base_price * i.quantity) > 10000 THEN 'high value'
-    END AS source_category
-FROM 
-    products p
-LEFT JOIN 
-    inventory i ON p.product_id = i.product_id
-WHERE 
-    i.quantity IS NULL 
-    or i.quantity > 400 
-    or p.base_price * i.quantity > 10000;
+    END AS source_category FROM products p LEFT JOIN inventory i ON p.product_id = i.product_id WHERE i.quantity IS NULL or i.quantity > 400 or p.base_price * i.quantity > 10000;
 
 --comments:
 -- The UNION operator is used to combine the result-set of two or more SELECT statements.
