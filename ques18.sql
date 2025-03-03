@@ -19,18 +19,18 @@ create role 'inventory_manager';
 create role 'stock_clerk';
 create role 'analyst';
 create role 'auditor';
-grant all privileges on inventory.* to 'inventory_manager';
-grant select on inventory.* to 'stock_clerk';
-grant select on products.* to 'stock_clerk';
-grant select on warehouses.* to 'stock_clerk';
-grant select on suppliers.* to 'stock_clerk';
+grant all privileges on inventory to 'inventory_manager';
+grant select on inventory to 'stock_clerk';
+grant select on products 'stock_clerk';
+grant select on warehouses to 'stock_clerk';
+grant select on suppliers to 'stock_clerk';
 grant update on inventory.quantity to 'stock_clerk';
-grant select on inventory.* to 'analyst';
-grant select on products.* to 'analyst';
-grant select on warehouses.* to 'analyst';
-grant select on suppliers.* to 'analyst';
-grant select on inventory.* to 'auditor';
-grant select on audit_log.* to 'auditor';
+grant select on inventory to 'analyst';
+grant select on products to 'analyst';
+grant select on warehouses to 'analyst';
+grant select on suppliers to 'analyst';
+grant select on inventory to 'auditor';
+grant select on audit_log to 'auditor';
 
 select (case when privilege_type = 'select' then 'yes' else 'no' end) as select,
 (case when privilege_type = 'insert' then 'yes' else 'no' end) as insert,
