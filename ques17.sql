@@ -13,10 +13,10 @@ Sports      | Yoga Mat    | 29.99 | Shoes      | Weights   | 2        | Medium-L
 
 --solution query:
 with quart as ( select p.base_price as price, p.category as category,
-first_value(p.product_name) over(partition by p.category order by i.last_updated asc) as first_sold,
+first_value(p.product_name) over(partition by p.category order by i.last_updated asc rows BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) as first_sold,
 last_value(p.product_name) over(partition by p.category order by i.last_updated rows BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING ) as last_sold,
 ntile(4) over(partition by p.category order by p.base_price asc) as quartile
-from products p join inventory i on p.product_id = i.product_id group by p.category)
+from products p join inventory i on p.product_id = i.product_id)
 select q.category,
 q.price,
 q.first_sold,
