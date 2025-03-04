@@ -21,12 +21,13 @@ p2.base_price as price2,
 w.location as warehouse from products p1
 join
 products p2
-on p1.product_id < p2.product_id
+on p1.product_id != p2.product_id
 and abs(p1.base_price - p2.base_price) < 20 and
 p1.category = p2.category
 join warehouses w on p1.product_id = w.product_id
-group by w.location and p1.category
+group by w.location,p1.category
 order by p1.category;
+
 
 --comments:
 -- The query uses a self join on the products table to find all pairs of products that are in the same category, have a price difference of less than $20 and are stocked in the same warehouse.
