@@ -16,8 +16,8 @@ with value1 as (select p.category, i.quantity, w.location, (p.base_price * i.qua
 select v.location,
 v.category,
 v.quantity,
-round(sum(v.value) over (order by v.location and v.category),2) as running_row,
-floor(avg(v.quantity) over (order by v.location and v.category)) as running_avg,
+round(sum(v.value) over (order by v.location,v.category),2) as running_row,
+floor(avg(v.quantity) over (order by v.location,v.category)) as running_avg,
 round((100 * v.value/sum(v.value) over()),2) as pct_of_total 
 from value1 v
 order by v.location and v.category;
