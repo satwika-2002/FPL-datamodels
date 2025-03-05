@@ -18,14 +18,14 @@ Smart Watch     | 175         | NULL           | 160            | NULL       | -
 --solution query:
 with quan as (select p.product_name,
 i.quantity as cut_quantity,
-lead(i.quantity,1) over(partition by p.product_id order by last_updated) as next_quantity,
-lag(i.quantity,1) over(partition by p.product_id order by last_updated) as prev_quantity from products p join inventory i on p.product_id = i.product_id order by p.product_id)
-select s.product_name,
-s.cut_quantity,
-s.next_quantity,
-s.prev_quantity,
-(((s.cut_quantity-s.prev_quantity) / (s.prev_quantity)) * 100)||'%' as pct_change,
-(((s.next_quantity-s.cut_quantity) / (s.cut_quantity)) * 100)||'%' as projected_change
+lead(i.quantity,1) over(partition by p.product_id order by i.last_updated) as next_quantity,
+lag(i.quantity,1) over(partition by p.product_id order by i.last_updated) as prev_quantity from products p join inventory i on p.product_id = i.product_id order by p.product_id)
+select q.product_name,
+q.cut_quantity,
+q.next_quantity,
+q.prev_quantity,
+(((q.cut_quantity-q.prev_quantity) / (q.prev_quantity)) * 100)||'%' as pct_change,
+(((q.next_quantity-q.cut_quantity) / (q.cut_quantity)) * 100)||'%' as projected_change
 from quan q;
 
 --comments:
